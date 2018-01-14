@@ -7,24 +7,24 @@ taxonomy:
 
 The Kunena Configuration feature allows users to tailor Kunena's functions to their specific site needs.  This feature allows, for example, users to decide what they will call their forum page, whether forum messages can be posted by anonymous users or only by registered users of the site, and whether other third-party components (like private messaging) are to be used.  Many of the choices can be made according to individual tastes; some, however, may cause unexpected consequences if they're not handled correctly.
 
-As a general guide, the default settings that ship with Kunena's installation kit will be adequate for most purposes. However, some suggested tips are offered in the article Configuration Tips.
+As a general guide, the default settings that ship with Kunena's installation kit will be adequate for most purposes.
 
 #### Basics
 This article describes how to change the Kunena configuration parameters.
 
 ##### Accessing the Kunena Configuration feature
-Ranks Management Menu Go to the Kunena Backend and select the Kunena Configuration feature.
+Go to the Kunena Backend and select the Kunena Configuration feature.
 
-##### Configuration Menu
-There are two basic functions: Settings (see below) can be changed; before they can be effective they must be saved.
+##### Configuration Page
+There are two basic functions: Save and Restore Default.
 
 Save function
 
-Any changes become effective by pressing the 'Save' button located at the top right of the page.
+- Any changes become effective by clicking the 'Save' button located at the top left of the page.
 
-Back function
+Restore Default function
 
-The back button returns you to the Kunena Control Panel.
+- This restores the default configuration parameters for Kunena.
 
 #### List of settings
 The settings are arranged in the groupings listed below.  The default/initial values are settings that are supplied with a clean installation of Kunena.  If a previously-installed version of Kunena or Fireboard had been installed on the user's site, the old values will be preserved.<br>
@@ -35,20 +35,23 @@ New versions of Kunena may add or remove items in the list below.  Please check 
 
 ##### Basic Settings
 
-Board Title
+Forum Title
 Initial/default value:  Kunena
 
-Board E-mail Address
+Forum E-mail Address
 Initial/default value:  Empty
 
 Send E-mails to Users
 Initial/default value:  Yes
-  
+
 Forum Offline
 Initial/default value:  No
 
 Forum Offline Message
 Initial/default value:  The Forum is currently offline for maintenance. Check back soon!
+
+Read Only Mode
+Initial/default value:  No
 
 Session Lifetime
 Initial/default value:  1800
@@ -90,7 +93,7 @@ Initial/default value:  1 minute
 
 ##### Look and Feel
 
-Threads Per Page
+Topics Per Page
 Initial/default value:  20
 
 Messages per page
@@ -123,17 +126,11 @@ Initial/default value:  No
 Show Moderators in Category Index
 Initial/default value:  Yes
 
-Category Image Path
+Category Legacy Image Path
 Initial/default value:  category_images
 
 Show Sub-Category Image
 Initial/default value:  Yes
-
-Textarea Width
-Initial/default value:  450
-
-Textarea Height
-Initial/default value:  300
 
 Enable Category Jump
 Initial/default value:  Yes
@@ -162,20 +159,8 @@ Initial/default value:  Yes
 Recent Topics Time Period
 Initial/default value:  Month
 
-Online Users Contains
-Initial/default value:  By time
-
-Online Users Time Limit
-Initial/default value:  1800
-
-User Count Contains
-Initial/default value:  All Real Users
-
 Default topic layout
 Initial/default value:  Flat
-
-Allow Different Topic Layouts
-Initial/default value:  No
 
 Force users to pickup a category
 Initial/default value:  No
@@ -189,21 +174,17 @@ Initial/default value:  Oldest Post First
 Search Time
 Initial/default value:  A Year Ago
 
-Allow to let user to change subject on replies
+Let users edit the subject
 Initial/default value:  Yes
 
-##### Length Settings
+Allow rating
+Initial/default value:  No
 
-Max. Subject Length
-Initial/default value:  50
+Number of characters from start for shorten filename
+Initial/default value:  0
 
-Max. Signature Length
-Initial/default value:  300
-
-Max. Personal Text Length
-Initial/default value:  50
-
----
+Number of characters from end for shorten filename
+Initial/default value:  14
 
 #### Users
 
@@ -257,10 +238,22 @@ Initial/default value:  Yes
 User can report himself
 Initial/default value:  Yes
 
+Define if you want to log action or moderation
+Initial/default value:  No
+
+Show user status
+Initial/default value:  Yes
+
 ##### Subscriptions
+
+Email Header Image
+Initial/default value:  /media/kunena/email/hero-wide.png
 
 Allow Subscriptions
 Initial/default value:  Yes
+
+Plain Text Emails
+Initial/default value:  No
 
 Include Post Contents
 Initial/default value:  Yes
@@ -334,6 +327,12 @@ Initial/default value:  6
 Hide Replies For Guests
 Initial/default value:  No
 
+Prevent posting topic or reply with URL in title
+Initial/default value:  No
+
+Allow moderators to permdelete
+Initial/default value:  No
+
 ##### CAPTCHA Configuration
 
 Display Captcha for :
@@ -341,15 +340,6 @@ Initial/default value:  Registered Users
 
 CAPTCHA Challenge for Users
 Initial/default value:  0
-
-reCAPTCHA Public Key
-Initial/default value:  Empty
-
-reCAPTCHA Private Key
-Initial/default value:  Empty
-
-reCAPTCHA Theme
-Initial/default value:  White Theme
 
 ##### Stop Forum Spam Configuration
 
@@ -392,6 +382,9 @@ Initial/default value:  8
 Protect Attachments
 Initial/default value:  No
 
+Enable utf8 characters on attachments
+Initial/default value:  Yes
+
 ##### Images
 
 Allow Image Uploads
@@ -410,19 +403,19 @@ Legal MIME Types
 Initial/default value:  image/jpeg,image/jpg,image/gif,image/png
 
 Maximum Image File Size
-Initial/default value:  150px
+Initial/default value:  150 kB
 
 Maximum Image Width
-Initial/default value:  800px
+Initial/default value:  800 px
 
 Maximum Image Height
-Initial/default value:  800px
+Initial/default value:  800 px
 
 Thumbnail Width
-Initial/default value:  32px
+Initial/default value:  32 px
 
 Thumbnail Height
-Initial/default value:  32px
+Initial/default value:  32 px
 
 Image Quality for JPG Resizing
 Initial/default value:  50%
@@ -460,7 +453,7 @@ Initial/default value:  Yes
 ##### BBCode Settings
 
 Disable Emoticons
-Initial/default value:  Yes
+Initial/default value:  No
 
 Show Spoiler Tag in Editor Toolbar
 Initial/default value:  Yes
@@ -489,6 +482,9 @@ Initial/default value:  Yes
 Auto Embed eBay Items
 Initial/default value:  Yes
 
+Auto Embed Soundcloud Items
+Initial/default value:  Yes
+
 Enable Code Highlighting
 Initial/default value:  No
 
@@ -508,6 +504,9 @@ The Twitter consumer key
 Initial/default value:  Empty
 
 The Twitter consumer secret
+Initial/default value:  Empty
+
+Google maps API key to get better stats usage of google API
 Initial/default value:  Empty
 
 ---
@@ -591,6 +590,12 @@ Initial/default value:  Yes
 Hide Super Users in user list
 Initial/default value:  No
 
+Online Users Contains
+Initial/default value:  By time
+
+Online Users Time Limit
+Initial/default value:  1800
+
 ##### Statistics Settings
 
 Show Who is Online
@@ -625,6 +630,9 @@ Initial/default value:  Yes
 
 Number of Popular Thank Yous
 Initial/default value:  5
+
+User Count Contains
+Initial/default value:  All Real Users
 
 ##### Poll Settings
 
