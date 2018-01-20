@@ -9,7 +9,7 @@ cache_enable: true
 visible: true
 ---
 
-Sometimes it happens that you want to change a text passage or a word. Or it it will just a language key displayed (such as COM_KUNENA_PUBLISH). This can be easily changed, Joomla offers the feature of the language override.
+You may occasionally want to change a text passage or a word, or you may encounter a language key displayed (such as COM_KUNENA_PUBLISH), indicating a missing translation. This can be easily changed by using the Joomla language override feature.
 
 ### Overwrite text
 
@@ -32,5 +32,5 @@ Sometimes it happens that you want to change a text passage or a word. Or it it 
 4. Save
 
 ![](overwrite.png)
-   
+
  >>>>>> If you know the language key, you can paste this code directly into the box Language Constant.
