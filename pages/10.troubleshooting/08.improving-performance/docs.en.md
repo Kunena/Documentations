@@ -34,13 +34,13 @@ The easiest way to check if your server is fast enough to run Joomla/**Kunena** 
 
 Small forums (10k posts, 1k users):
 * 1024 MB of RAM guaranteed
-* 1 CPU @ 667 MHz (or 1/4 CPU @ 2.67MHz) guaranteed
-* Fast hard drive (min RPM 7.2K, preferably 15K or SSD)
+* 1 CPU guaranteed
+* SSD
 
 Large forums (100-200k posts, 10k users):
 * 4096 MB of RAM guaranteed
-* 2 CPUs @ 2.66 Ghz guaranteed
-* Fast hard drive (min RPM 15K or SSD)
+* 2 CPUs guaranteed
+* SSD
 
 The above numbers are just rough estimates; the actual requirements depend on your site's content and how many active (or concurrent) users you have on your site at any particular time.
 
@@ -60,7 +60,7 @@ Having less is faster. In many cases Joomla sites have many modules and plug-ins
 
 #### Remove unused plugins
 
-The first thing you should do is review the plugins that you've installed and/or enabled on your website. This is particularly important for Joomla! 1.5 sites because every loaded plug-in decreases the overall site performance and contributes to slowing down the system. The effect is smaller in Joomla! 1.7, but if you have a lot of system, user or content plug-ins (or you have **JomSocial** or **Community Builder** on your site), all of those must still be loaded and initialised, which adds to memory requirements and can contribute to performance degradation.
+The first thing you should do is review the plugins that you've installed and/or enabled on your website. If you have a lot of system, user or content plug-ins (or you have **JomSocial** or **Community Builder** on your site), all of those must still be loaded and initialised, which adds to memory requirements and can contribute to performance degradation.
 
 Just be careful not to disable or uninstall plug-ins that are needed for other components.
 
@@ -72,17 +72,19 @@ There is also another reason to remove modules: some modules display content fro
 
 In Joomla there is an easy way to evaluate module performance. Just enable Joomla Debug Mode and reload the page. At the bottom of the page there's a summary that looks like this:
 
-  Profile Information
-  Application afterLoad: 0.000 seconds, 0.89 MB
-  Application afterInitialise: 0.106 seconds, 4.74 MB
-  Application afterRoute: 0.113 seconds, 5.49 MB
-  Application afterDispatch: 1.319 seconds, 19.99 MB
-  Application afterRender: **1.479 seconds**, **23.20 MB**
+```
+Profile Information
+Application afterLoad: 0.000 seconds, 0.89 MB
+Application afterInitialise: 0.106 seconds, 4.74 MB
+Application afterRoute: 0.113 seconds, 5.49 MB
+Application afterDispatch: 1.319 seconds, 19.99 MB
+Application afterRender: **1.479 seconds**, **23.20 MB**
   
-  Memory Usage
-  24464304
+Memory Usage
+24464304
   
-  **21 queries logged**
+**21 queries logged**
+```
 
 The most important information has been highlighted in the above example. They are _time used, memory usage_ and _number of queries_. You should reload the page a few times to get more reliable numbers and try again without the module. If the numbers are noticeably smaller without that module, it's a good idea to remove it from all the forum pages.
 
@@ -131,42 +133,60 @@ Administrators often have limited tools to reduce the number of loaded component
 This can be done by adding following lines in your Apache `.htaccess` file (also remember to check if mod_expires is enabled):
 
  * By default cache all files for one day
+   ```
    ExpiresDefault "access plus 1 day"
+   ```
  
  * Your document html
+   ```
    ExpiresByType text/html "access plus 0 seconds"
+   ```
  
  * Data
+   ```
    ExpiresByType text/xml "access plus 0 seconds"
    ExpiresByType application/xml "access plus 0 seconds"
    ExpiresByType application/json "access plus 0 seconds"
+   ```
  
  * Feed
+   ```
    ExpiresByType application/rss+xml "access plus 5 minutes"
    ExpiresByType application/atom+xml "access plus 5 minutes"
+   ```
  
  * Favicon (cannot be renamed)
+   ```
    ExpiresByType image/x-icon "access plus 1 day"
+   ```
  
  * Media: images, video, audio
+   ```
    ExpiresByType image/gif "access plus 12 hours"
    ExpiresByType image/png "access plus 12 hours"
-   ExpiresByType image/jpg "access plus 12 hours"
    ExpiresByType image/jpeg "access plus 12 hours"
+   ExpiresByType image/webp "access plus 12 hours"
+   ```
  
  * HTC files (css3pie etc)
+   ```
    ExpiresByType text/x-component "access plus 1 week"
+   ```
  
  * Webfonts
+   ```
    ExpiresByType application/x-font-ttf "access plus 1 week"
    ExpiresByType font/opentype "access plus 1 week"
    ExpiresByType application/x-font-woff "access plus 1 week"
    ExpiresByType image/svg+xml "access plus 1 week"
    ExpiresByType application/vnd.ms-fontobject "access plus 1 week"
+   ```
  
  * CSS and JavaScript
+   ```
    ExpiresByType text/css "access plus 1 day"
    ExpiresByType application/javascript "access plus 1 day"
+   ```
 
 The contents are tuned for Joomla and Kunena (installing a new version may cause wrong images to be used for 12 hours, css for 24 hours) unless the user reloads the page.
 
@@ -195,29 +215,31 @@ More information can be found at [Configuring Apache for Maximum Performance](ht
 MySQL settings are typically not very well optimised for Kunena. 
 Here is modified part of a **my.cnf** file (optimised for 2 CPUs / 4 threads, >4GB RAM, 350MB database):
 
- default_table_type      = InnoDB
- key_buffer              = 24M
- join_buffer_size        = 2M
- max_heap_table_size     = 128M
- max_allowed_packet      = 16M
- thread_stack            = 128K
- thread_cache_size       = 10
+```
+default_table_type      = InnoDB
+key_buffer              = 24M
+join_buffer_size        = 2M
+max_heap_table_size     = 128M
+max_allowed_packet      = 16M
+thread_stack            = 128K
+thread_cache_size       = 10
  
- max_connections needs to be 2-3x larger than MaxClients in Apache
- max_connections         = 300
- table_cache             = 4096
+max_connections needs to be 2-3x larger than MaxClients in Apache
+max_connections         = 300
+table_cache             = 4096
  
- thread_concurrency = 2x number of concurrent threads
- thread_concurrency      = 8
- query_cache_limit       = 1M
+thread_concurrency = 2x number of concurrent threads
+thread_concurrency      = 8
+query_cache_limit       = 1M
  
- Next 3 settings allows queries to be cached
- query_cache_size        = 96M
- query_cache_min_res_unit= 2K
- query_cache_type        = 1
+Next 3 settings allows queries to be cached
+query_cache_size        = 96M
+query_cache_min_res_unit= 2K
+query_cache_type        = 1
  
- innodb_buffer_pool_size should be larger than your database size (if you have enough memory)
- innodb_buffer_pool_size = 384M
+innodb_buffer_pool_size should be larger than your database size (if you have enough memory)
+innodb_buffer_pool_size = 384M
+```
 
 With these settings MySQL uses at most 1GB of RAM and loads the whole database into memory. InnoDB is used because it allows this, which makes the site to run much faster as everything is loaded into the memory and no I/O (disk access) is needed.
 
@@ -225,16 +247,20 @@ PS: remember to change all Kunena tables to use InnoDB, otherwise you don't bene
 
 #### PHP
 
-Most of the CPU usage on your server is spent inside Apache processes that run the PHP interpreter (or Joomla). There are ways to make PHP more efficient in both CPU and memory usage.
+Most of the CPU usage on your server is spent inside Apache processes that run the PHP interpreter (or Joomla). There are ways to make PHP more efficient in both CPU and memory usage. 
+
+##### Keep PHP updated
+
+Try to always use the latest possible stable PHP version as they often improve both stability and performance. But whenever new PHP version gets released, it may be better to wait all the Joomla extensions to have enough time to fix the deprecated code.
 
 ##### Use PHP opcode compiler
 
-Caching compiled PHP scripts can save you a lot of time and server load. PHP extensions exists to make this easy for you; look for PHP cache solutions like APC, eAccelerator and xCache. These will cache PHP scripts in their compiled state so the same script will not have to be executed repeatedly for each client.
+Caching compiled PHP scripts can save you a lot of time and server load. PHP offers opcache module, which should always be installed in your server. 
 
-**Tip:** If you experience random white screens or your Apache server starts to die, you're hitting bugs in your PHP opcode compiler. If this happens to you, it may be safer to turn off PHP opcode caching (you can still keep using it in your Joomla cache).}}
+Additionally PHP has APCu module, which allows you to cache Joomla data into memory instead of using files. This may also speed up your site as cache can be read from memory and not from disk.
 
 ##### Optimise your memory limit
 
-While both Joomla and Kunena recommends you to use **memory_limit=64M**, try to minimise the value to save some resources and avoid memory leaks from wasting your memory. You can see the amount of used memory in each page by enabling Joomla Debug Mode.
+While Kunena recommends you to use **memory_limit=128M**, in memory limited servers you may want to minimise the value to save some resources and to prevent any memory leaks from wasting your memory. You can see the amount of used memory in each page by enabling Joomla Debug Mode.
 
 Lowering the value is possible if you have minimised the number of the modules and plugins on your site. Just remember that integrating Kunena with other components and uploading large images also costs some memory, so be careful not to set the limit too low. If memory runs out, the page fails to load and you end up having either a blank page or an error message.
