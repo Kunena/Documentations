@@ -17,14 +17,14 @@ visible: true
 You can register at (https://www.transifex.com/)
 
 #### Kunena on Transifex
-You can find the official translation page for **Kunena** under this URL: (https://www.transifex.com/Kunena-Forum/)
+You can find the official translation page for **Kunena** at this URL: (https://www.transifex.com/Kunena-Forum/)
 
 #### Joining a Transifex team
 To manage the process of who is translating what, there are teams for each language: (https://www.transifex.com/Kunena-Forum/teams/).
-Please create a new team for your language if there is no yet. Please use the five digit xx_XX language code instead of the two digit language code. Or request a membership to a specific language.
+Please create a new team for your language if there is none yet. Please use the five character xx_XX language code instead of the two character language code. Or request membership in a specific language team.
 
 #### Doing the translation
-Go back to the main page of the **Kunena** project page: (https://www.transifex.com/Kunena-Forum/). There you can see a list of the language files. To translate one of those just click on it. On the next side you can see some additional info and below is a list of the available languages. If your language is not listed, just click on **_add Translation_** and choose you language. If your language is available, you can click on it. Now you get a popup with some options. You can upload your local `.ini` file and **_Transifex_** will find the translations automatically or you can click on **_View strings online_**. When you press on **_Translate now_** you get a new view with all strings which are translated or should be translated. Just fill your translations into the text fields and press save. Your done with this file, go to the next.
+Go back to the main page of the **Kunena** project page: (https://www.transifex.com/Kunena-Forum/). There you can see a list of the language files. To translate one of those just click on it. On the next page you can see some additional info and below is a list of the available languages. If your language is not listed, just click on **_add Translation_** and choose you language. If your language is available, you can click on it. Now you get a popup with some options. You can upload your local `.ini` file and **_Transifex_** will find the translations automatically or you can click on **_View strings online_**. When you press on **_Translate now_** you get a new view with all strings which are translated or should be translated. Just fill your translations into the text fields and press save. When you'r done with this file, go to the next.
 
 For further information visit (http://docs.transifex.com/).
 
@@ -46,10 +46,10 @@ The Linux package called `transifex-client` is included in the most distribution
 ##### Windows
 
 #### Setup the client
-It is really simple when you know what to do. I will show the way with clone from github!
-* Clone Kunena or any module or plugin from github.
+It is really simple when you know what to do. I will show the way with clone from GitHub!
+* Clone Kunena or any module or plugin from GitHub.
 * Open a terminal/console and change directory to Kunena
-* You can add your own language into `.tx/config` file (look below)
+* You can add your own language into `.tx/config` file (see below)
 * `tx pull -l transifex language code` (see also) (http://docs.transifex.com/client/)
 
 #### Add a new language
@@ -57,7 +57,8 @@ It is really simple when you know what to do. I will show the way with clone fro
 Because **_Transifex_** uses different language codes than Joomla! you should map your own language from **_Transifex_** to Joomla! format.
 
 * Edit file called `.tx/config` and find language mapping rules inside [main] section:
-**[main]**
-host = (https://www.transifex.com)
-lang_map = **ar:ar-AA, ca_ES:ca-ES, cs_CZ: cs-CZ ,da_DK:da-DK, de_DE:de-DE, [...] zh_TW:zh-TW**
-* Now add rule for your own language; line breaks are not allowed for the variable!
+  **[main]**
+  host = (https://www.transifex.com)
+  lang_map = **ar:ar-AA, ca_ES:ca-ES, cs_CZ: cs-CZ ,da_DK:da-DK, de_DE:de-DE, [...] zh_TW:zh-TW**
+* Now add a rule for your own language; line breaks are not allowed for the variable!
+
